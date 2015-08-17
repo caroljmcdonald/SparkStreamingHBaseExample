@@ -1,0 +1,113 @@
+COHUTTA,3/15/11,J.Thomas,Install
+COHUTTA,2/20/12,J.Thomas,Inspection
+COHUTTA,1/13/13,J.Thomas,Inspection
+COHUTTA,6/15/13,J.Thomas,Tighten Mounts
+COHUTTA,2/27/14,J.Thomas,Inspection
+COHUTTA,3/6/14,E. Simmons,Adjust bearing alignment
+NANTAHALLA,3/15/11,J.Thomas,Install
+NANTAHALLA,2/19/12,J.Thomas,Inspection
+NANTAHALLA,1/12/13,J.Thomas,Inspection
+NANTAHALLA,6/14/13,J.Thomas,Tighten Mounts
+NANTAHALLA,2/26/14,J.Thomas,Inspection
+NANTAHALLA,3/3/14,E. Simmons,Adjust bearing alignment
+NANTAHALLA,3/13/14,E. Simmons,Shutdown Failure
+THERMALITO,9/26/09,W.Stevens,Install
+THERMALITO,11/22/09,W.Stevens,Tighten Mounts
+THERMALITO,6/10/10,T. LaBou,Inspection
+THERMALITO,1/7/11,T. LaBou,Inspection
+THERMALITO,9/26/11,W.Stevens,Inspection
+THERMALITO,10/2/11,T. LaBou,Bearing Seal
+THERMALITO,11/5/11,D.Pitre,Inspect
+THERMALITO,5/22/12,D.Pitre,Inspect
+THERMALITO,12/15/12,D.Pitre,Inspect
+THERMALITO,6/16/13,T. LaBou,Vane clearance adjust
+THERMALITO,7/11/13,W.Stevens,Inspect
+THERMALITO,2/5/14,D.Pitre,Inspect
+BUTTE,10/2/09,W.Stevens,Install
+BUTTE,10/5/09,W.Stevens,Inspect
+BUTTE,11/22/09,W.Stevens,Tighten Mounts
+BUTTE,6/10/10,T. LaBou,Inspect
+BUTTE,1/7/11,T. LaBou,Inspect
+BUTTE,9/26/11,W.Stevens,Inspect
+BUTTE,10/2/11,T. LaBou,Bearing Seal
+BUTTE,11/5/11,D.Pitre,Inspect
+BUTTE,5/22/12,D.Pitre,Inspect
+BUTTE,12/15/12,D.Pitre,Inspect
+BUTTE,6/16/13,T. LaBou,Vane clearance adjust
+BUTTE,7/11/13,W.Stevens,Inspect
+BUTTE,2/5/14,D.Pitre,Inspect
+CARGO,10/2/09,T. LaBou,Install
+CARGO,10/5/09,W.Stevens,Inspect
+CARGO,11/22/09,T. LaBou,Tighten Mounts
+CARGO,6/10/10,T. LaBou,Inspect
+CARGO,1/7/11,T. LaBou,Inspect
+CARGO,9/26/11,W.Stevens,Inspect
+CARGO,10/2/11,T. LaBou,Bearing Seal
+CARGO,11/5/11,D.Pitre,Inspect
+CARGO,5/22/12,D.Pitre,Inspect
+CARGO,12/15/12,D.Pitre,Inspect
+CARGO,6/18/13,T. LaBou,Vane clearance adjust
+CARGO,7/11/13,W.Stevens,Inspect
+CARGO,2/5/14,D.Pitre,Inspect
+CARGO,3/13/14,D.Pitre,Tighten Mounts
+LAGNAPPE,10/2/09,T. LaBou,Install
+LAGNAPPE,10/5/09,W.Stevens,Inspect
+LAGNAPPE,11/24/09,W.Stevens,Tighten Mounts
+LAGNAPPE,6/10/10,T. LaBou,Inspect
+LAGNAPPE,1/7/11,T. LaBou,Inspect
+LAGNAPPE,9/30/11,W.Stevens,Inspect
+LAGNAPPE,10/3/11,T. LaBou,Bearing Seal
+LAGNAPPE,11/5/11,D.Pitre,Inspect
+LAGNAPPE,5/22/12,D.Pitre,Inspect
+LAGNAPPE,12/15/12,W.Stevens,Inspect
+LAGNAPPE,6/18/13,T. LaBou,Vane clearance adjust
+LAGNAPPE,7/11/13,W.Stevens,Inspect
+LAGNAPPE,2/5/14,D.Pitre,Inspect
+LAGNAPPE,3/14/14,D.Pitre,Shutdown Main Feed Line Failure
+CHER,11/5/09,D.Pitre,Install
+CHER,11/23/09,W.Stevens,Inspect
+CHER,11/24/09,W.Stevens,Tighten Mounts
+CHER,6/10/10,T. LaBou,Inspect
+CHER,1/7/11,T. LaBou,Inspect
+CHER,9/30/11,W.Stevens,Inspect
+CHER,10/3/11,W.Stevens,Bearing Seal
+CHER,11/5/11,D.Pitre,Inspect
+CHER,5/22/12,W.Stevens,Inspect
+CHER,12/15/12,W.Stevens,Inspect
+CHER,6/22/13,T. LaBou,Vane clearance adjust
+CHER,7/11/13,W.Stevens,Inspect
+CHER,2/5/14,D.Pitre,Inspect
+CHER,3/15/14,T. LaBou,Tighten Mounts
+ANDOUILLE,11/25/09,W.Stevens,Install
+ANDOUILLE,11/27/09,W.Stevens,Inspect
+ANDOUILLE,12/2/09,W.Stevens,Tighten Mounts
+ANDOUILLE,6/10/10,T. LaBou,Inspect
+ANDOUILLE,1/7/11,T. LaBou,Inspect
+ANDOUILLE,9/30/11,W.Stevens,Inspect
+ANDOUILLE,10/7/11,D.Pitre,Bearing Seal
+ANDOUILLE,11/5/11,D.Pitre,Inspect
+ANDOUILLE,5/22/12,W.Stevens,Inspect
+ANDOUILLE,12/15/12,W.Stevens,Inspect
+ANDOUILLE,6/25/13,T. LaBou,Vane clearance adjust
+ANDOUILLE,7/11/13,W.Stevens,Inspect
+ANDOUILLE,2/5/14,D.Pitre,Inspect
+ANDOUILLE,3/12/14,T. LaBou,Tighten Mounts
+MOJO,6/20/11,N.Boudreau,Install
+MOJO,7/11/11,N.Boudreau,Tighten Mounts
+MOJO,1/22/13,N.Boudreau,Inspect
+MOJO,7/15/13,N.Boudreau,Inspect
+MOJO,12/15/13,N.Boudreau,Inspect
+MOJO,6/7/13,M.Dugas,Inspect
+MOJO,1/11/14,N.Boudreau,Inspect
+MOJO,3/14/14,M.Dugas,Inspect
+BBKING,7/15/11,M.Dugas,Install
+BBKING,7/11/11,N.Boudreau,Tighten Mounts
+BBKING,1/24/13,N.Boudreau,Inspect
+BBKING,7/22/13,N.Boudreau,Inspect
+BBKING,12/16/13,N.Boudreau,Inspect
+BBKING,12/18/13,M.Dugas,Shutdown Failure
+BBKING,12/19/13,M.Dugas,Replace Front Motor Bearing
+BBKING,12/20/13,N.Boudreau,Inspect
+BBKING,6/12/13,M.Dugas,Inspect
+BBKING,1/14/14,N.Boudreau,Inspect
+BBKING,3/14/14,M.Dugas,Inspect
