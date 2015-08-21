@@ -15,7 +15,7 @@ To run the  streaming:
 
 Step 3: start the streaming app
 
-/opt/mapr/spark/spark-1.3.1/bin/spark-submit --class examples.HBaseSensorStream sparkstreamhbaseapp-1.0.jar
+/opt/mapr/spark/spark-1.3.1/bin/spark-submit --driver-class-path `hbase classpath` --class examples.HBaseSensorStream sparkstreamhbaseapp-1.0.jar
 
 Step 4: copy the streaming data file to the stream directory
 cp sensordata.csv  /user/user01/stream/.
@@ -28,9 +28,9 @@ scan '/user/user01/sensor',  {COLUMNS=>['alert']}
 
 Step 6: launch one of the programs below to read data and calculate daily statistics
 calculate stats for one column
-/opt/mapr/spark/spark-1.3.1/bin/spark-submit --class examples.HBaseReadWrite sparkstreamhbaseapp-1.0.jar
+/opt/mapr/spark/spark-1.3.1/bin/spark-submit --driver-class-path `hbase classpath` --class examples.HBaseReadWrite sparkstreamhbaseapp-1.0.jar
 calculate stats for whole row
-/opt/mapr/spark/spark-1.3.1/bin/spark-submit --class examples.HBaseReadRowWriteStats sparkstreamhbaseapp-1.0.jar
+/opt/mapr/spark/spark-1.3.1/bin/spark-submit --driver-class-path `hbase classpath` --class examples.HBaseReadRowWriteStats sparkstreamhbaseapp-1.0.jar
 
 launch the shell and scan for statistics
 scan '/user/user01/sensor',  {COLUMNS=>['stats']}
