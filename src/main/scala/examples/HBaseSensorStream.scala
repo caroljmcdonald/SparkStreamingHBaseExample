@@ -1,7 +1,5 @@
 /*
- * This example reads a row of time series sensor data
- * calculates the the statistics for the hz data 
- * and then writes these statistics to the stats column family
+ * 
  *  
  */
 
@@ -14,23 +12,26 @@ import org.apache.hadoop.hbase.mapred.TableOutputFormat
 import org.apache.hadoop.hbase.util.Bytes
 import org.apache.hadoop.mapred.JobConf
 import org.apache.spark.SparkConf
-import org.apache.spark.rdd.PairRDDFunctions
+
 import org.apache.spark.streaming.Seconds
 import org.apache.spark.streaming.StreamingContext
-import org.apache.hadoop.mapreduce.Job
-import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat
-import org.apache.hadoop.fs.Path
 
 object HBaseSensorStream {
   final val tableName = "/user/user01/sensor"
-  final val cfData = "data"
-  final val cfDataBytes = Bytes.toBytes(cfData)
-  final val cfAlert = "alert"
-  final val cfAlertBytes = Bytes.toBytes(cfAlert)
-  
+  final val cfDataBytes = Bytes.toBytes("data")
+  final val cfAlertBytes = Bytes.toBytes("alert")
+  final val colHzBytes = Bytes.toBytes("hz")
+  final val colDispBytes = Bytes.toBytes("disp")
+  final val colFloBytes = Bytes.toBytes("flo")
+  final val colSedBytes = Bytes.toBytes("sedPPM")
+  final val colPsiBytes = Bytes.toBytes("psi")
+  final val colChlBytes = Bytes.toBytes("chlPPM")
+
+  // schema for sensor data   
   case class Sensor(resid: String, date: String, time: String, hz: Double, disp: Double, flo: Double, sedPPM: Double, psi: Double, chlPPM: Double)
 
   object Sensor {
+    // function to parse line of sensor data into Sensor class
     def parseSensor(str: String): Sensor = {
       val p = str.split(",")
       Sensor(p(0), p(1), p(2), p(3).toDouble, p(4).toDouble, p(5).toDouble, p(6).toDouble, p(7).toDouble, p(8).toDouble)
@@ -42,13 +43,13 @@ object HBaseSensorStream {
       val rowkey = sensor.resid + "_" + dateTime
       val put = new Put(Bytes.toBytes(rowkey))
       // add to column family data, column  data values to put object 
-      put.add(cfDataBytes, Bytes.toBytes("hz"), Bytes.toBytes(sensor.hz))
-      put.add(cfDataBytes, Bytes.toBytes("disp"), Bytes.toBytes(sensor.disp))
-      put.add(cfDataBytes, Bytes.toBytes("flo"), Bytes.toBytes(sensor.flo))
-      put.add(cfDataBytes, Bytes.toBytes("sedPPM"), Bytes.toBytes(sensor.sedPPM))
-      put.add(cfDataBytes, Bytes.toBytes("psi"), Bytes.toBytes(sensor.psi))
-      put.add(cfDataBytes, Bytes.toBytes("chlPPM"), Bytes.toBytes(sensor.chlPPM))
-      (new ImmutableBytesWritable, put)
+      put.add(cfDataBytes, colHzBytes, Bytes.toBytes(sensor.hz))
+      put.add(cfDataBytes, colDispBytes, Bytes.toBytes(sensor.disp))
+      put.add(cfDataBytes, colFloBytes, Bytes.toBytes(sensor.flo))
+      put.add(cfDataBytes, colSedBytes, Bytes.toBytes(sensor.sedPPM))
+      put.add(cfDataBytes, colPsiBytes, Bytes.toBytes(sensor.psi))
+      put.add(cfDataBytes, colChlBytes, Bytes.toBytes(sensor.chlPPM))
+      return (new ImmutableBytesWritable(Bytes.toBytes(rowkey)), put)
     }
     // convert psi alert to an HBase put object
     def convertToPutAlert(sensor: Sensor): (ImmutableBytesWritable, Put) = {
@@ -57,40 +58,42 @@ object HBaseSensorStream {
       val key = sensor.resid + "_" + dateTime
       val p = new Put(Bytes.toBytes(key))
       // add to column family alert, column psi data value to put object 
-      p.add(cfAlertBytes, Bytes.toBytes("psi"), Bytes.toBytes(sensor.psi))
-      (new ImmutableBytesWritable, p)
+      p.add(cfAlertBytes, colPsiBytes, Bytes.toBytes(sensor.psi))
+      return (new ImmutableBytesWritable(Bytes.toBytes(key)), p)
     }
   }
 
   def main(args: Array[String]): Unit = {
-    val sparkConf = new SparkConf().setAppName("HBaseStream")
-    val ssc = new StreamingContext(sparkConf, Seconds(2))
+    // set up HBase Table configuration
     val conf = HBaseConfiguration.create()
-    // set HBase table to write to
     conf.set(TableOutputFormat.OUTPUT_TABLE, tableName)
-    // set directory to read streaming data from
-    val lines = ssc.textFileStream("/user/user01/stream")
-    lines.print()
-    lines.foreachRDD { rdd =>
-      // parse the line of data into sensor object
-      val sensorRDD = rdd.map(Sensor.parseSensor)
-      sensorRDD.take(1).foreach(println)
-      
-      // filter sensor data for low psi
-      val alertRDD = sensorRDD.filter(sensor => sensor.psi < 5.0)
-      alertRDD.take(1).foreach(println)
+    val jobConfig: JobConf = new JobConf(conf, this.getClass)
+    jobConfig.set("mapreduce.output.fileoutputformat.outputdir", "/user/user01/out")
+    jobConfig.setOutputFormat(classOf[TableOutputFormat])
+    jobConfig.set(TableOutputFormat.OUTPUT_TABLE, tableName)
 
-      // set JobConfiguration variables for writing to HBase
-      val jobConfig: JobConf = new JobConf(conf, this.getClass)
-      jobConfig.set("mapreduce.output.fileoutputformat.outputdir", "/user/user01/out")
-      jobConfig.setOutputFormat(classOf[TableOutputFormat])
-      jobConfig.set(TableOutputFormat.OUTPUT_TABLE, tableName)
+    val sparkConf = new SparkConf().setAppName("HBaseStream")
+    // create a StreamingContext, the main entry point for all streaming functionality
+    val ssc = new StreamingContext(sparkConf, Seconds(2))
+
+    // parse the lines of data into sensor objects
+    val sensorDStream = ssc.textFileStream("/user/user01/stream").map(Sensor.parseSensor)
+    sensorDStream.print()
+
+    sensorDStream.foreachRDD { rdd =>
+      // filter sensor data for low psi
+      val alertRDD = rdd.filter(sensor => sensor.psi < 5.0)
+      alertRDD.take(1).foreach(println)
       // convert sensor data to put object and write to HBase table column family data
-      new PairRDDFunctions(sensorRDD.map(Sensor.convertToPut)).saveAsHadoopDataset(jobConfig)
+      rdd.map(Sensor.convertToPut).
+        saveAsHadoopDataset(jobConfig)
       // convert alert data to put object and write to HBase table column family alert
-      new PairRDDFunctions(alertRDD.map(Sensor.convertToPutAlert)).saveAsHadoopDataset(jobConfig)
+      rdd.map(Sensor.convertToPutAlert).
+        saveAsHadoopDataset(jobConfig)
     }
+    // Start the computation
     ssc.start()
+    // Wait for the computation to terminate
     ssc.awaitTermination()
 
   }

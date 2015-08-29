@@ -24,10 +24,8 @@ import org.apache.spark.util.StatCounter
 object HBaseReadWrite {
 
   final val tableName = "/user/user01/sensor"
-  final val cfData = "data"
-  final val cfDataBytes = Bytes.toBytes(cfData)
-  final val cfStats = "stats"
-  final val cfStatsBytes = Bytes.toBytes(cfStats)
+  final val cfDataBytes = Bytes.toBytes("data")
+  final val cfStatsBytes = Bytes.toBytes("stats")
 
   def main(args: Array[String]) {
     val sparkConf = new SparkConf().setAppName("HBaseTest")
@@ -35,6 +33,8 @@ object HBaseReadWrite {
 
     val conf = HBaseConfiguration.create()
     conf.set(TableInputFormat.INPUT_TABLE, tableName)
+    conf.set(TableInputFormat.SCAN_ROW_START, "COHUTTA_3/10/14")
+    conf.set(TableInputFormat.SCAN_ROW_STOP, "COHUTTA_3/11/14")
     // specify specific column to return
     conf.set(TableInputFormat.SCAN_COLUMNS, "data:psi")
 
