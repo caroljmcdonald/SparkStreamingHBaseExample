@@ -148,9 +148,9 @@ object HBaseReadRowWriteStats {
     jobConfig.setOutputFormat(classOf[TableOutputFormat])
     jobConfig.set(TableOutputFormat.OUTPUT_TABLE, tableName)
     // convert the SensorStatsRow objects into HBase put objects and write to HBase
-    new PairRDDFunctions(sensorStatsRowRDD.map {
+    sensorStatsRowRDD.map {
       case sensorStatsRow => SensorStatsRow.convertToPutStats(sensorStatsRow)
-    }).saveAsHadoopDataset(jobConfig)
+    }.saveAsHadoopDataset(jobConfig)
   }
 
 }

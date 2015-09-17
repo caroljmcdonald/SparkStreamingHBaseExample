@@ -51,15 +51,6 @@
 			<version>0.98.9-mapr-1503-r1</version>
 		</dependency>
 
-	<!-- for windows eclipse luna , set java path or eclipse complains
-		<dependency>
-			<groupId>jdk.tools</groupId>
-			<artifactId>jdk.tools</artifactId>
-			<version>1.7</version>
-			<scope>system</scope>
-			<systemPath>C:\Program Files\Java\jdk1.7.0_51\lib/tools.jar</systemPath>
-		</dependency>
--->
 
 		<dependency>
 			<groupId>org.scala-lang</groupId>

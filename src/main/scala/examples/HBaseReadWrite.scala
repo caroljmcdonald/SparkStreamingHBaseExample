@@ -62,7 +62,7 @@ object HBaseReadWrite {
     jobConfig.setOutputFormat(classOf[TableOutputFormat])
     jobConfig.set(TableOutputFormat.OUTPUT_TABLE, tableName)
     // convert rowkey, psi stats to put and write to hbase table stats column family
-    new PairRDDFunctions(keyStatsRDD.map { case (k, v) => convertToPut(k, v) }).saveAsHadoopDataset(jobConfig)
+    keyStatsRDD.map { case (k, v) => convertToPut(k, v) }.saveAsHadoopDataset(jobConfig)
 
   }
   // convert rowkey, stats to put 

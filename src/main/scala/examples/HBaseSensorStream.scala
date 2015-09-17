@@ -88,7 +88,7 @@ object HBaseSensorStream {
       rdd.map(Sensor.convertToPut).
         saveAsHadoopDataset(jobConfig)
       // convert alert data to put object and write to HBase table column family alert
-      rdd.map(Sensor.convertToPutAlert).
+      alertRDD.map(Sensor.convertToPutAlert).
         saveAsHadoopDataset(jobConfig)
     }
     // Start the computation
