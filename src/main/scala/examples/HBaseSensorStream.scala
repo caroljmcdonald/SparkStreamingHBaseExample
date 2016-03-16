@@ -16,7 +16,7 @@ import org.apache.spark.SparkConf
 import org.apache.spark.streaming.Seconds
 import org.apache.spark.streaming.StreamingContext
 
-object HBaseSensorStream {
+object HBaseSensorStream extends Serializable {
   final val tableName = "/user/user01/sensor"
   final val cfDataBytes = Bytes.toBytes("data")
   final val cfAlertBytes = Bytes.toBytes("alert")
@@ -30,7 +30,7 @@ object HBaseSensorStream {
   // schema for sensor data   
   case class Sensor(resid: String, date: String, time: String, hz: Double, disp: Double, flo: Double, sedPPM: Double, psi: Double, chlPPM: Double)
 
-  object Sensor {
+  object Sensor extends Serializable{
     // function to parse line of sensor data into Sensor class
     def parseSensor(str: String): Sensor = {
       val p = str.split(",")

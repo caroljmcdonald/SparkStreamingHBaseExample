@@ -21,7 +21,7 @@ import org.apache.spark.rdd.PairRDDFunctions
 import org.apache.spark.rdd.RDD.rddToPairRDDFunctions
 import org.apache.spark.util.StatCounter
 
-object HBaseReadWrite {
+object HBaseReadWrite extends Serializable{
 
   final val tableName = "/user/user01/sensor"
   final val cfDataBytes = Bytes.toBytes("data")

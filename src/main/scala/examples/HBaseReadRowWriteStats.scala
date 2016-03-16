@@ -32,7 +32,7 @@ object HBaseReadRowWriteStats {
 
   case class SensorRow(rowkey: String, hz: Double, disp: Double, flo: Double, sedPPM: Double, psi: Double, chlPPM: Double)
 
-  object SensorRow {
+  object SensorRow extends Serializable{
     def parseSensorRow(result: Result): SensorRow = {
       val rowkey = Bytes.toString(result.getRow())
       // remove time from rowKey, stats row key is for day
